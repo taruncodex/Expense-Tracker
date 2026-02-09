@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Trash2 } from "lucide-react";
 import { deleteExpense } from "../redux/action";
-export const ExpenseTable = () => {
+
+export const ExpenseTable = ({ isDelete }) => {
   const Expenses = useSelector((state) => state.expense);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
@@ -11,14 +12,15 @@ export const ExpenseTable = () => {
 
   return (
     <>
-      <div className=" mt-20 shadow-lg ">
+      <div className=" mt-10 shadow-lg ">
         <table width={"100%"}>
           <thead>
             <tr className=" text-left text-xs font-medium text-gray-500 tracking-wider">
               <th className="px-6 py-3">Description</th>
               <th className="px-6 py-3">Category</th>
               <th className="px-6 py-3">amount</th>
-              <th className="px-6 py-3">action</th>
+
+              {isDelete && <th className="px-6 py-3">action</th>}
             </tr>
           </thead>
           <tbody className="mt-10 uppercase ">
@@ -34,12 +36,14 @@ export const ExpenseTable = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap ">{ele.amount}</td>
 
-                <td
-                  className="px-6 py-4 whitespace-nowrap text-red-800"
-                  onClick={() => handleDelete(i)}
-                >
-                  {<Trash2 size="16" />}
-                </td>
+                {isDelete && (
+                  <td
+                    className="px-6 py-4 whitespace-nowrap text-red-800"
+                    onClick={() => handleDelete(i)}
+                  >
+                    {<Trash2 size="16" />}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

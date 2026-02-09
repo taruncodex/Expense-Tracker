@@ -12,7 +12,7 @@ export const Dashboard = () => {
       <div className="md:px-16 lg:px-14">
         <Budget />
         <ExpenseForm />
-        <ExpenseTable />
+        <ExpenseTable isDelete={true} />
       </div>
     </section>
   );
